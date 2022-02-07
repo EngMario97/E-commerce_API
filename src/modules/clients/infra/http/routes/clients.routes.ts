@@ -1,9 +1,10 @@
 import { Router } from "express";
 import ClientsController from "../controllers/ClientsController";
 import OrdersByClientController from "../../../../clients/infra/http/controllers/OrdersByClientController";
+import CreateClientValidation from "../middleware/CreateClientValidation";
 const routes = Router();
 
-routes.post("/", ClientsController.create);
+routes.post("/", CreateClientValidation, ClientsController.create);
 
 routes.get("/", ClientsController.list);
 
