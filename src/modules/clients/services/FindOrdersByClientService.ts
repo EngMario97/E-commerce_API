@@ -4,9 +4,9 @@ import OrdersByClientRepository from "../infra/typeorm/repositories/OrdersByClie
 
 export default class FindOrdersByClientService {
   public async execute(id: number): Promise<Client> {
-    const categoryRepository = new OrdersByClientRepository();
+    const ordersByClientRepository = new OrdersByClientRepository();
 
-    const client = await categoryRepository.findById(id);
+    const client = await ordersByClientRepository.findById(id);
 
     if (!client) {
       throw new AppError("Cliente não existe");
