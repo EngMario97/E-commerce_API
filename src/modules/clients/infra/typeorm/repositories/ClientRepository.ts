@@ -40,4 +40,24 @@ export default class ClientRepository implements IClientRepository {
     const client = this.ormRepository.create(data);
     return this.ormRepository.save(client);
   }
+
+  async findCpf(cpf: string): Promise<Client | undefined> {
+    const client = await this.ormRepository.findOne({ cpf: cpf });
+
+    return client;
+
+  }
+
+  async findEmail(email: string): Promise<Client | undefined> {
+    const client = await this.ormRepository.findOne({ email: email });
+
+    return client;
+
+  }
+  async findTelefone(telefone: string): Promise<Client | undefined> {
+    const client = await this.ormRepository.findOne({ telefone: telefone });
+
+    return client;
+
+  }
 }

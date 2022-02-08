@@ -16,6 +16,9 @@ export default interface IClientRepository {
   findById(id: number): Promise<Client | undefined>;
   update(data: IClientDTO): Promise<Client>;
   delete(id: number): Promise<DeleteResult>;
+  findCpf(cpf: string): Promise<Client | undefined>;
+  findEmail(email: string): Promise<Client | undefined>;
+  findTelefone(telefone: string): Promise<Client | undefined>;
 
   // fazer outros médodos aqui
 }

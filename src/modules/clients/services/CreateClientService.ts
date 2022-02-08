@@ -17,24 +17,19 @@ import FindAllClientsService from "./FindAllClientsService";
 export default class CreateClientService {
   public async execute(data: IClientDTO): Promise<Client> {
     const clientRepository = new ClientRepository();
-    const findAllClientsService = new FindAllClientsService();
 
-    let clientList = await findAllClientsService.execute();
+    const cpf = await clientRepository.findCpf(data.cpf);
+    const email = await clientRepository.findEmail(data.email);
+    const telefone = await clientRepository.findTelefone(data.telefone);
 
-    for (let i = 0; i < clientList.length; i++) {
-
-      if (data.cpf === clientList[i].cpf) {
-        throw new AppError("CPF já existe");
-      }
-
-      if (data.email === clientList[i].email) {
-        throw new AppError("Email já existe");
-      }
-
-      if (data.telefone === clientList[i].telefone) {
-        throw new AppError("Telefone já existe");
-      }
-
+    if (cpf) {
+      throw new AppError("CPF já existe");
+    }
+    if (email) {
+      throw new AppError("Email já existe");
+    }
+    if (telefone) {
+      throw new AppError("Telefone já existe");
     }
 
     const client = await clientRepository.create(data);
